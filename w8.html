@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Profile Page</title>
+
+    <!-- PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            background: white;
+            padding: 20px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        .profile-pic {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #333;
+        }
+        .center { text-align: center; }
+        .info { margin-top: 20px; line-height: 1.6; }
+        .button-section { text-align: center; margin-top: 20px; }
+
+        .resume-container {
+            max-width: 600px;
+            background: fff;
+            color: #222;
+            padding: 20px;
+            margin: 30px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+            display: none;
+        }
+
+        .section-title {
+            font-weight: bold;
+            margin-top: 15px;
+            text-decoration: underline;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            border: none;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover { background-color: #0056b3; }
+
+        input, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #555;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Profile Page -->
+    <div class="container" id="profilePage">
+        <div class="center">
+            <img src="profile1.jpeg" alt="Profile Picture" class="profile-pic" />
+        </div>
+
+        <div class="info">
+            <p><strong>Name:</strong> Anusha H Naik</p>
+            <p><strong>Father Name:</strong> Hanamantagouda</p>
+            <p><strong>Mother Name:</strong> Laxmi</p>
+            <p><strong>Date of Birth:</strong> 30/07/2005</p>
+            <p><strong>Contact Number:</strong> 7348938580</p>
+            <p><strong>Bio:</strong> Engineering aspirant</p>
+        </div>
+
+        <div class="button-section">
+            <button onclick="openResumePage()">Resume</button>
+        </div>
+    </div>
+
+    <!-- Resume Page -->
+    <div class="resume-container" id="resumePage">
+        <div id="resumeContent">
+            <h2>Resume Details</h2>
+
+            <label class="section-title">Name:</label>
+            <input type="text" value="Anusha H Naik">
+
+            <label class="section-title">Email ID:</label>
+            <input type="email" value="anushahnaik@gmail.com">
+
+            <label class="section-title">Mobile Number:</label>
+            <input type="text" value="7348938580">
+
+            <label class="section-title">Career Objectives:</label>
+            <textarea rows="3">Obtain a responsible position in an organization with the best capabilities, skills and knowledge.</textarea>
+
+            <label class="section-title">Academic Qualifications:</label>
+            <textarea rows="3">Studying in 5th sem engineering</textarea>
+
+            <label class="section-title">Professional Skills:</label>
+            <textarea rows="3">Basic computer knowledge, typing</textarea>
+
+<label class="section-title">Work Experience:</label>
+            <textarea rows="3">Fresher</textarea>
+        </div>
+
+        <br><br>
+        <button onclick="downloadResume()">Download Resume (PDF)</button>
+        <br><br>
+        <button onclick="goBack()">Back to Profile</button>
+    </div>
+
+    <script>
+        function openResumePage() {
+            document.getElementById("profilePage").style.display = "none";
+            document.getElementById("resumePage").style.display = "block";
+        }
+
+        function goBack() {
+            document.getElementById("resumePage").style.display = "none";
+            document.getElementById("profilePage").style.display = "block";
+        }
+
+        // Download resume as PDF
+        function downloadResume() {
+            const resumeElement = document.getElementById("resumeContent");
+
+            const options = {
+                margin: 0.5,
+                filename: "Anusha_Resume.pdf",
+                image: { type: "jpeg", quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: "in", format: "letter", orientation: "portrait" }
+            };
+
+            html2pdf().set(options).from(resumeElement).save();
+        }
+    </script>
+
+</body>
+</html>
